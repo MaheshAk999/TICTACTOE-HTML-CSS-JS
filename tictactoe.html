@@ -1,0 +1,306 @@
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+        <style>
+.block {
+	position: relative;
+	margin-top: 4cm;
+	margin-bottom:100px;
+background-color:rgb(38, 216, 216);
+}
+.block:before, .block:after {
+	content: '';
+	position: absolute;
+	left: -2px;
+	top: -2px;
+	background: linear-gradient(45deg, #fb0094, #0000ff, #00ff00,#ffff00, #ff0000, #fb0094, 
+		#0000ff, #00ff00,#ffff00, #ff0000);
+	background-size: 400%;
+	width: calc(100% + 4px);
+	height: calc(100% + 4px);
+	z-index: -1;
+	animation: steam 20s linear infinite;
+}
+@keyframes steam {
+	0% {
+		background-position: 0 0;
+	}
+	50% {
+		background-position: 400% 0;
+	}
+	100% {
+		background-position: 0 0;
+	}
+}
+.block:after {
+	filter: blur(50px);
+}
+button{
+    width:2cm;
+    height:2cm;
+    background-color: rgb(38, 216, 216);
+    border:none;
+    outline:none;
+    cursor:pointer;
+}
+#topborder{
+    border-top:1px solid black;
+}
+#borderbottom{
+    border-bottom: 1px solid black;
+}
+table,tr,td{
+    border:1px solid rgb(111, 102, 102);
+}
+        </style>
+    </head>
+    <div class=block id="div" align=center style="border:3px solid red; padding:100px; margin-right:13cm; margin-left:13cm; background-color:rgb(38, 216, 216); color:red ">
+       <table style="background-color: rgb(38, 216, 216);">
+        <tr>
+            <td > <button id="0">  </button> </td>
+            <td > <button id="1">  </button> </td>
+            <td > <button id="2">  </button> </td>
+        </tr>
+        <tr>
+            <td > <button id="3">  </button> </td>
+            <td > <button id="4">  </button></td>
+            <td > <button id="5">  </button> </td>
+        </tr>
+        <tr>
+            <td > <button id="6">  </button> </td>
+            <td > <button id="7">  </button> </td>
+            <td > <button id="8">  </button> </td>
+        </tr>
+       </table>
+        </div>
+        <div id="winner" style="display:none">
+        <h1  style="font-size:105px; text-align: center; " id="h1">  </h1>
+        <p style="color: #f7f8fa; text-align: center; font-size:55px;" id="p"> WINNER !</p>
+        </div>
+        
+        <script>
+           var c=1;
+           var m="";
+           let ind=[-999,-999,-999,-999,-999,-999,-999,-999,-999];
+      $("document").ready(function(){
+        $("button").click(function(){
+            let v=$(this).html();
+         if(c%2!=0 && v!="<b> X </b>" && v!="<b> O </b>")
+         {
+            let a=this.id;
+            let ht="<b> X </b>"
+            ind[a]=ht;
+          $(this).html(ht)
+          $(this).css('color','#42474f')
+          $(this).css('font-size','35px')
+          if(ind[0]==ht && ind[1]==ht && ind[2]==ht)
+            {
+                $("#0").css('color','red')
+                $("#1").css('color','red')
+                $("#2").css('color','red')
+                m='X';
+                const a=setTimeout(fun,500);
+            }
+            else 
+            if(ind[3]==ht && ind[4]==ht && ind[5]==ht)
+            {
+                $("#3").css('color','red')
+                $("#4").css('color','red')
+                $("#5").css('color','red')
+                m='X';
+                const a=setTimeout(fun,500);
+            }
+            else 
+            if(ind[6]==ht && ind[7]==ht && ind[8]==ht)
+            {
+                $("#6").css('color','red')
+                $("#7").css('color','red')
+                $("#8").css('color','red')
+                m='X';
+                const a=setTimeout(fun,500);
+            }
+            else 
+            if(ind[0]==ht && ind[3]==ht && ind[6]==ht)
+            {
+                $("#0").css('color','red')
+                $("#3").css('color','red')
+                $("#6").css('color','red')
+                m='X';
+                const a=setTimeout(fun,500);
+            }
+            else 
+            if(ind[1]==ht && ind[4]==ht && ind[7]==ht)
+            {
+                $("#1").css('color','red')
+                $("#4").css('color','red')
+                $("#7").css('color','red')
+                m='X';
+                const a=setTimeout(fun,500);
+            }
+            else 
+            if(ind[2]==ht && ind[5]==ht && ind[8]==ht)
+            {
+                $("#2").css('color','red')
+                $("#5").css('color','red')
+                $("#8").css('color','red')
+                m='X';
+                const a=setTimeout(fun,500);
+            }
+            else 
+            if(ind[0]==ht && ind[4]==ht && ind[8]==ht)
+            {
+                $("#0").css('color','red')
+                $("#4").css('color','red')
+                $("#8").css('color','red')
+                m='X';
+                const a=setTimeout(fun,500);
+            }
+            else 
+            if(ind[2]==ht && ind[4]==ht && ind[6]==ht)
+            {
+                $("#2").css('color','red')
+                $("#4").css('color','red')
+                $("#6").css('color','red')
+                m='X';
+                const a=setTimeout(fun,500);
+            }
+            else 
+            if(ind.includes(-999)==false)
+            {
+                
+                const a=setTimeout(fun,500);
+            }
+          c++;
+         }
+         else
+         if(c%2==0 && v!="<b> X </b>" && v!="<b> O </b>"){
+            let a=this.id;
+            let ht="<b> O </b>"
+            ind[a]=ht;
+            $(this).html("<b> O </b>")
+            $(this).css('color','#f7f8fa')
+            $(this).css('font-size','35px')
+            if(ind[0]==ht && ind[1]==ht && ind[2]==ht)
+            {
+                $("#0").css('color','red')
+                $("#1").css('color','red')
+                $("#2").css('color','red')
+                m='O';
+                const a=setTimeout(fun,500);
+            }
+            else 
+            if(ind[3]==ht && ind[4]==ht && ind[5]==ht)
+            {
+                $("#3").css('color','red')
+                $("#4").css('color','red')
+                $("#5").css('color','red')
+                m='O';
+                const a=setTimeout(fun,500);
+            }
+            else 
+            if(ind[6]==ht && ind[7]==ht && ind[8]==ht)
+            {
+                $("#6").css('color','red')
+                $("#7").css('color','red')
+                $("#8").css('color','red')
+                m='O';
+                const a=setTimeout(fun,500);
+            }
+            else 
+            if(ind[0]==ht && ind[3]==ht && ind[6]==ht)
+            {
+                $("#0").css('color','red')
+                $("#3").css('color','red')
+                $("#6").css('color','red')
+                m='O';
+                const a=setTimeout(fun,500);
+            }
+            else 
+            if(ind[1]==ht && ind[4]==ht && ind[7]==ht)
+            {
+                $("#1").css('color','red')
+                $("#4").css('color','red')
+                $("#7").css('color','red')
+                m='O';
+                const a=setTimeout(fun,500);
+            }
+            else 
+            if(ind[2]==ht && ind[5]==ht && ind[8]==ht)
+            {
+                $("#2").css('color','red')
+                $("#5").css('color','red')
+                $("#8").css('color','red')
+                m='O';
+                const a=setTimeout(fun,500);
+            }
+            else 
+            if(ind[0]==ht && ind[4]==ht && ind[8]==ht)
+            {
+                $("#0").css('color','red')
+                $("#4").css('color','red')
+                $("#8").css('color','red')
+                m='O';
+                const a=setTimeout(fun,500);
+            }
+            else 
+            if(ind[2]==ht && ind[4]==ht && ind[6]==ht)
+            {
+                $("#2").css('color','red')
+                $("#4").css('color','red')
+                $("#6").css('color','red')
+                m='O';
+                const a=setTimeout(fun,500);
+            }
+            else 
+            if(ind.includes(-999)==false)
+            {
+                const a=setTimeout(fun,500);
+            }
+            c++;
+         }
+         function fun()
+            {  
+                for(let i=0; i<ind.length; i++)
+                {
+                    ind[i]=-999
+                }
+                if(m=="O")
+                {
+                    document.getElementById("h1").innerHTML="O"
+                    m=""
+                }
+                else
+                if(m=="X"){
+                    document.getElementById("h1").innerHTML="X"
+                    m=""
+                }
+                else{
+                    document.getElementById("h1").innerHTML="Tie"
+                    document.getElementById("p").style.display="none"
+                }
+                $("#div").css('display','none')
+                $("body").css('margin-top','5cm')
+                    $('body').css('background-color','rgb(38, 216, 216)')
+                    document.getElementById("winner").style.display="block";
+                const a=setTimeout(fun1,500);
+                function fun1()
+                {
+                    var a=prompt("DO you want to play again (y/n)")
+                    if(a=="y")
+                    {
+                        c=1
+                        $("body").css('margin-top','0')
+                        $("#div").css('display','block')
+                        document.getElementById("winner").style.display="none";
+                        $('body').css('background-color','white')
+                        $("button").html("")
+                    }
+                }
+                    
+            }
+        })
+      })
+        </script>
+</html>
+
+
